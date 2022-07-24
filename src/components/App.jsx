@@ -14,14 +14,19 @@ export class App extends Component {
       { id: 'id-3', name: 'Eden Clements', number: '+38(063)6451779' },
       { id: 'id-4', name: 'Annie Copeland', number: '+38(073)2279126' },
     ],
+
     filter: '',
   };
 
   componentDidMount() {
-    const contacts = localStorage.getItem('contacts');
-    const parseContacts = JSON.parse(contacts);
-    if (parseContacts) {
-      this.setState({ contacts: parseContacts });
+    try {
+      const contacts = localStorage.getItem('contacts');
+      const parseContacts = JSON.parse(contacts);
+      if (parseContacts) {
+        this.setState({ contacts: parseContacts });
+      }
+    } catch (error) {
+      this.setState({ error: 'SORRY, Backend is unavailable today!' });
     }
   }
   componentDidUpdate(prevState) {
